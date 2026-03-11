@@ -42,17 +42,17 @@ object-fit:cover;
 display:block;
 }
 
-.container{
-width:min(calc(100% - 40px),var(--max));
-margin:auto;
-}
-
 a{
 text-decoration:none;
 color:inherit;
 }
 
-/* ---------- TOPBAR ---------- */
+.container{
+width:min(calc(100% - 40px),var(--max));
+margin:auto;
+}
+
+/* NAV */
 
 .topbar{
 position:sticky;
@@ -96,7 +96,7 @@ font-size:14px;
 color:var(--muted);
 }
 
-/* ---------- HERO ---------- */
+/* HERO */
 
 .hero{
 position:relative;
@@ -154,7 +154,7 @@ background:white;
 color:black;
 }
 
-/* ---------- SECTIONS ---------- */
+/* SECTIONS */
 
 .section{
 padding:80px 0;
@@ -182,7 +182,7 @@ font-size:clamp(2rem,4vw,3rem);
 margin-bottom:10px;
 }
 
-/* ---------- IMAGE CARD ---------- */
+/* IMAGE CARDS */
 
 .image-card{
 border-radius:var(--radius);
@@ -190,7 +190,7 @@ overflow:hidden;
 aspect-ratio:16/10;
 box-shadow:var(--shadow);
 cursor:pointer;
-transition:all .3s;
+transition:.3s;
 }
 
 .image-card img{
@@ -205,7 +205,20 @@ transform:scale(1.06);
 box-shadow:0 30px 70px rgba(0,0,0,.18);
 }
 
-/* ---------- FEATURES ---------- */
+/* FLYER SPECIAL */
+
+.flyer{
+border-radius:0;
+aspect-ratio:auto;
+box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.flyer img{
+object-fit:contain;
+background:white;
+}
+
+/* FEATURES */
 
 .feature-grid{
 display:grid;
@@ -221,7 +234,7 @@ padding:16px;
 border-radius:16px;
 }
 
-/* ---------- CARDS ---------- */
+/* CARDS */
 
 .cards{
 display:grid;
@@ -237,7 +250,7 @@ padding:20px;
 box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-/* ---------- BOX ---------- */
+/* CONTACT */
 
 .contact-box{
 background:white;
@@ -251,7 +264,7 @@ margin-top:20px;
 margin-bottom:14px;
 }
 
-/* ---------- FOOTER ---------- */
+/* FOOTER */
 
 .footer{
 background:var(--primary);
@@ -260,7 +273,7 @@ padding:30px 0;
 margin-top:40px;
 }
 
-/* ---------- MOBILE ---------- */
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -320,7 +333,7 @@ Odd Fellow 35 Concordia
 
 </section>
 
-<!-- OM LOGEN -->
+<!-- OM -->
 
 <section class="section" id="om">
 
@@ -448,7 +461,7 @@ Live musik · Mad · Drikkevarer
 
 </div>
 
-<div class="image-card">
+<div class="image-card flyer">
 <img src="billede5_flyer.png">
 </div>
 
@@ -494,8 +507,6 @@ Frederiksgade 15<br>
 </div>
 
 </section>
-
-</main>
 
 <footer class="footer">
 
