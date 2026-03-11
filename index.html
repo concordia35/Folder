@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Odd Fellow 35 Concordia</title>
@@ -19,9 +20,9 @@
 --accent:#7c2f39;
 --primary:#607884;
 --line:#ded4ca;
---shadow:0 18px 40px rgba(39,31,24,.10);
---radius:24px;
---max:1120px;
+--shadow:0 18px 40px rgba(39,31,24,.12);
+--radius:26px;
+--max:1100px;
 }
 
 *{box-sizing:border-box}
@@ -35,22 +36,30 @@ line-height:1.6;
 }
 
 img{
-display:block;
 width:100%;
 height:100%;
 object-fit:cover;
+display:block;
 }
 
 .container{
-width:min(calc(100% - 32px), var(--max));
+width:min(calc(100% - 40px),var(--max));
 margin:auto;
 }
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+/* ---------- TOPBAR ---------- */
 
 .topbar{
 position:sticky;
 top:0;
-background:rgba(245,241,235,.85);
-border-bottom:1px solid rgba(96,120,132,.12);
+background:rgba(245,241,235,.9);
+border-bottom:1px solid var(--line);
+z-index:20;
 }
 
 .topbar-inner{
@@ -71,63 +80,68 @@ font-weight:600;
 }
 
 .brand-mark{
-width:38px;
-height:38px;
+width:36px;
+height:36px;
 border-radius:50%;
+border:1px solid var(--line);
 display:grid;
 place-items:center;
-border:1px solid rgba(96,120,132,.25);
-background:white;
 color:var(--accent);
 }
 
 nav{
 display:flex;
 gap:18px;
+font-size:14px;
+color:var(--muted);
 }
 
-nav a{
-color:var(--muted);
-font-size:14px;
-text-decoration:none;
-}
+/* ---------- HERO ---------- */
 
 .hero{
-padding:40px 0;
-}
-
-.hero-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:36px;
+position:relative;
+height:70vh;
+display:flex;
 align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+overflow:hidden;
 }
 
-h1,h2,h3{
+.hero img{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-1;
+}
+
+.hero-overlay{
+background:rgba(0,0,0,.45);
+padding:60px;
+border-radius:30px;
+}
+
+.hero h1{
 font-family:'Lora',serif;
-margin:0;
+font-size:clamp(2.6rem,5vw,4rem);
+margin-bottom:20px;
 }
 
-h1{
-font-size:clamp(2.4rem,5vw,4rem);
-}
-
-.lead{
-margin-top:20px;
-color:var(--muted);
-}
-
-.hero-actions{
+.hero-buttons{
 display:flex;
 gap:14px;
-margin-top:24px;
+justify-content:center;
+flex-wrap:wrap;
 }
 
 .btn{
 padding:14px 22px;
 border-radius:999px;
 font-weight:600;
-text-decoration:none;
 }
 
 .btn-primary{
@@ -137,93 +151,93 @@ color:white;
 
 .btn-secondary{
 background:white;
-border:1px solid var(--line);
+color:black;
 }
 
-.icon-links{
-display:flex;
-gap:12px;
-margin-top:18px;
-flex-wrap:wrap;
-}
-
-.icon-link{
-display:flex;
-align-items:center;
-gap:8px;
-padding:10px 14px;
-background:white;
-border:1px solid var(--line);
-border-radius:999px;
-text-decoration:none;
-}
-
-.image-card{
-border-radius:var(--radius);
-overflow:hidden;
-box-shadow:var(--shadow);
-
-/* Dette gør alle billeder ens */
-aspect-ratio:16/10;
-}
+/* ---------- SECTIONS ---------- */
 
 .section{
-padding:60px 0;
+padding:80px 0;
 }
 
 .section-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:40px;
+gap:50px;
 align-items:center;
 }
 
 .label{
 color:var(--accent);
 text-transform:uppercase;
-letter-spacing:.18em;
 font-size:13px;
+letter-spacing:.18em;
 font-weight:700;
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
-.section p{
-color:var(--muted);
+h2{
+font-family:'Lora',serif;
+font-size:clamp(2rem,4vw,3rem);
+margin-bottom:10px;
 }
+
+/* ---------- IMAGE CARD ---------- */
+
+.image-card{
+border-radius:var(--radius);
+overflow:hidden;
+aspect-ratio:16/10;
+box-shadow:var(--shadow);
+cursor:pointer;
+transition:all .3s;
+}
+
+.image-card img{
+transition:transform .7s ease;
+}
+
+.image-card:hover img{
+transform:scale(1.06);
+}
+
+.image-card:hover{
+box-shadow:0 30px 70px rgba(0,0,0,.18);
+}
+
+/* ---------- FEATURES ---------- */
 
 .feature-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:12px;
-margin-top:24px;
+margin-top:20px;
 }
 
 .feature{
 background:white;
 border:1px solid var(--line);
-border-radius:16px;
 padding:16px;
+border-radius:16px;
 }
+
+/* ---------- CARDS ---------- */
 
 .cards{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:18px;
-margin-top:24px;
+margin-top:20px;
 }
 
 .card{
 background:white;
-padding:20px;
 border-radius:18px;
-box-shadow:0 12px 28px rgba(39,31,24,.08);
+padding:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-.soft-block{
-background:#e8dfd3;
-padding:34px;
-border-radius:36px;
-}
+/* ---------- BOX ---------- */
 
 .contact-box{
 background:white;
@@ -234,31 +248,32 @@ margin-top:20px;
 }
 
 .contact-item{
-margin-bottom:18px;
+margin-bottom:14px;
 }
+
+/* ---------- FOOTER ---------- */
 
 .footer{
 background:var(--primary);
 color:white;
-padding:28px 0;
+padding:30px 0;
 margin-top:40px;
 }
 
-.footer-inner{
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
-}
+/* ---------- MOBILE ---------- */
 
 @media(max-width:900px){
 
-.hero-grid,
 .section-grid{
 grid-template-columns:1fr;
 }
 
 .cards{
 grid-template-columns:1fr;
+}
+
+.hero{
+height:60vh;
 }
 
 }
@@ -273,12 +288,12 @@ grid-template-columns:1fr;
 
 <div class="brand">
 <div class="brand-mark">◌</div>
-<span>Odd Fellow 35 Concordia</span>
+Odd Fellow 35 Concordia
 </div>
 
 <nav>
-<a href="#om">Om logen</a>
-<a href="#livet">Livet i logen</a>
+<a href="#om">Om</a>
+<a href="#livet">Logeliv</a>
 <a href="#arrangementer">Arrangementer</a>
 <a href="#kontakt">Kontakt</a>
 </nav>
@@ -286,53 +301,46 @@ grid-template-columns:1fr;
 </div>
 </header>
 
-<main>
+<!-- HERO -->
 
 <section class="hero">
-<div class="container hero-grid">
 
-<div>
+<img src="billede1_bygning.png">
 
-<div class="label">Broderloge nr. 35 Concordia</div>
+<div class="hero-overlay">
 
 <h1>Nysgerrig på Odd Fellow i Slagelse?</h1>
 
-<div class="hero-actions">
+<div class="hero-buttons">
 <a class="btn btn-primary" href="#kontakt">Kontakt os</a>
-<a class="btn btn-secondary" href="#arrangementer">Se arrangementer</a>
-</div>
-
-<div class="icon-links">
-<a class="icon-link" href="mailto:om35@concordia.oddfellow.dk">Mail</a>
-<a class="icon-link" href="https://www.facebook.com/groups/oddfellowslagelse">Facebook</a>
+<a class="btn btn-secondary" href="#arrangementer">Se arrangement</a>
 </div>
 
 </div>
 
-<div class="image-card">
-<img src="billede1_bygning.png">
-</div>
-
-</div>
 </section>
 
+<!-- OM LOGEN -->
 
 <section class="section" id="om">
+
 <div class="container section-grid">
 
 <div>
 
 <div class="label">Om logen</div>
 
-<h2>Et fællesskab med historie og værdier</h2>
+<h2>Et fællesskab med historie</h2>
 
 <p>Odd Fellow Ordenen er en international orden med mere end 200 års historie.</p>
 
 <div class="feature-grid">
-<div class="feature">Venskab og fortrolighed</div>
-<div class="feature">Etik og personlig udvikling</div>
-<div class="feature">Respekt for forskellighed</div>
+
+<div class="feature">Venskab</div>
+<div class="feature">Personlig udvikling</div>
+<div class="feature">Fortrolighed</div>
 <div class="feature">Lokalt fællesskab</div>
+
 </div>
 
 </div>
@@ -342,11 +350,14 @@ grid-template-columns:1fr;
 </div>
 
 </div>
+
 </section>
 
+<!-- LIVET -->
 
 <section class="section" id="livet">
-<div class="container soft-block section-grid">
+
+<div class="container section-grid">
 
 <div>
 
@@ -363,12 +374,12 @@ grid-template-columns:1fr;
 
 <div class="card">
 <h3>Foredrag</h3>
-<p>Inspiration og nye perspektiver.</p>
+<p>Oplæg og inspiration.</p>
 </div>
 
 <div class="card">
 <h3>Samvær</h3>
-<p>Uformelle samtaler og fællesskab.</p>
+<p>Gode samtaler og fællesskab.</p>
 </div>
 
 </div>
@@ -380,8 +391,10 @@ grid-template-columns:1fr;
 </div>
 
 </div>
+
 </section>
 
+<!-- FÆLLESSKAB -->
 
 <section class="section">
 
@@ -393,7 +406,7 @@ grid-template-columns:1fr;
 
 <h2>Ro og gode samtaler</h2>
 
-<p>Logen er et sted hvor relationer vokser over tid.</p>
+<p>Logen er et sted hvor relationer udvikles over tid.</p>
 
 </div>
 
@@ -405,6 +418,7 @@ grid-template-columns:1fr;
 
 </section>
 
+<!-- ARRANGEMENT -->
 
 <section class="section" id="arrangementer">
 
@@ -412,26 +426,22 @@ grid-template-columns:1fr;
 
 <div>
 
-<div class="label">Arrangementer</div>
+<div class="label">Arrangement</div>
 
-<h2>Næste arrangement</h2>
+<h2>Sct. Patrick's Day</h2>
 
 <div class="contact-box">
 
 <div class="contact-item">
-<strong>Sct. Patrick’s Day i Slagelse</strong>
+Fredag d. 20 marts
 </div>
 
 <div class="contact-item">
-Fredag den 20. marts · 16.00–23.00
+Live musik · Mad · Drikkevarer
 </div>
 
 <div class="contact-item">
-Live musik · Drikkevarer · Mad
-</div>
-
-<div class="contact-item">
-<a href="https://www.facebook.com/events/1629155851768043">Se arrangement</a>
+<a href="https://www.facebook.com/events/1629155851768043">Se begivenhed</a>
 </div>
 
 </div>
@@ -446,6 +456,7 @@ Live musik · Drikkevarer · Mad
 
 </section>
 
+<!-- KONTAKT -->
 
 <section class="section" id="kontakt">
 
@@ -488,10 +499,8 @@ Frederiksgade 15<br>
 
 <footer class="footer">
 
-<div class="container footer-inner">
-
-<div>Broderloge nr. 35 Concordia · Slagelse</div>
-
+<div class="container">
+Broderloge nr. 35 Concordia · Slagelse
 </div>
 
 </footer>
