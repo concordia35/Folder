@@ -67,8 +67,8 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:14px 0;
       gap:16px;
+      padding:14px 0;
     }
 
     .brand{
@@ -80,6 +80,7 @@
       font-size:14px;
       font-weight:600;
       color:#4f6671;
+      flex:0 0 auto;
     }
 
     .brand-mark{
@@ -91,6 +92,7 @@
       place-items:center;
       color:var(--accent);
       background:#fff;
+      flex:0 0 auto;
     }
 
     nav{
@@ -99,6 +101,11 @@
       font-size:14px;
       color:var(--muted);
       flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    nav a{
+      white-space:nowrap;
     }
 
     .hero{
@@ -112,7 +119,7 @@
       overflow:hidden;
     }
 
-    .hero img{
+    .hero > img{
       position:absolute;
       inset:0;
       z-index:-1;
@@ -313,7 +320,6 @@
       background:white;
       border:1px solid var(--line);
       border-radius:999px;
-      text-decoration:none;
       box-shadow:0 10px 25px rgba(39,31,24,.06);
       font-weight:600;
       color:#4f6671;
@@ -330,11 +336,17 @@
       aspect-ratio:auto;
       box-shadow:0 20px 50px rgba(0,0,0,.25);
       background:white;
+      cursor:default;
     }
 
     .flyer img{
       object-fit:contain;
       background:white;
+      transform:none !important;
+    }
+
+    .flyer:hover{
+      box-shadow:0 20px 50px rgba(0,0,0,.25);
     }
 
     .footer{
@@ -367,6 +379,46 @@
 
       .hero-overlay{
         padding:36px 24px;
+      }
+
+      nav{
+        overflow-x:auto;
+        white-space:nowrap;
+        width:100%;
+        padding-bottom:6px;
+        justify-content:flex-start;
+        flex-wrap:nowrap;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+
+      nav::-webkit-scrollbar{
+        display:none;
+      }
+
+      nav a{
+        display:inline-block;
+        padding-right:16px;
+      }
+    }
+
+    @media(max-width:680px){
+      .hero-overlay{
+        padding:28px 18px;
+        border-radius:22px;
+      }
+
+      .hero h1,
+      h2{
+        max-width:none;
+      }
+
+      .hero p{
+        font-size:1rem;
+      }
+
+      .topbar-inner{
+        align-items:flex-start;
       }
     }
   </style>
