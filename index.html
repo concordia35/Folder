@@ -1,520 +1,648 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odd Fellow 35 Concordia</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odd Fellow 35 Concordia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f1eb;
+      --card:#fffdf9;
+      --text:#2b2623;
+      --muted:#615a56;
+      --accent:#7c2f39;
+      --primary:#607884;
+      --line:#ded4ca;
+      --shadow:0 18px 40px rgba(39,31,24,.12);
+      --radius:26px;
+      --max:1100px;
+    }
 
-<style>
+    *{box-sizing:border-box}
 
-:root{
---bg:#f5f1eb;
---card:#fffdf9;
---text:#2b2623;
---muted:#615a56;
---accent:#7c2f39;
---primary:#607884;
---line:#ded4ca;
---shadow:0 18px 40px rgba(39,31,24,.12);
---radius:26px;
---max:1100px;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-*{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
 
-body{
-margin:0;
-font-family:'Inter',sans-serif;
-background:var(--bg);
-color:var(--text);
-line-height:1.6;
-}
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-}
+    img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
 
-a{
-text-decoration:none;
-color:inherit;
-}
+    .container{
+      width:min(calc(100% - 40px),var(--max));
+      margin:auto;
+    }
 
-.container{
-width:min(calc(100% - 40px),var(--max));
-margin:auto;
-}
+    .topbar{
+      position:sticky;
+      top:0;
+      background:rgba(245,241,235,.92);
+      border-bottom:1px solid var(--line);
+      z-index:20;
+      backdrop-filter:blur(10px);
+    }
 
-/* NAV */
+    .topbar-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 0;
+      gap:16px;
+    }
 
-.topbar{
-position:sticky;
-top:0;
-background:rgba(245,241,235,.9);
-border-bottom:1px solid var(--line);
-z-index:20;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:14px;
+      font-weight:600;
+      color:#4f6671;
+    }
 
-.topbar-inner{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:14px 0;
-}
+    .brand-mark{
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      display:grid;
+      place-items:center;
+      color:var(--accent);
+      background:#fff;
+    }
 
-.brand{
-display:flex;
-align-items:center;
-gap:12px;
-letter-spacing:.16em;
-text-transform:uppercase;
-font-size:14px;
-font-weight:600;
-}
+    nav{
+      display:flex;
+      gap:18px;
+      font-size:14px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
 
-.brand-mark{
-width:36px;
-height:36px;
-border-radius:50%;
-border:1px solid var(--line);
-display:grid;
-place-items:center;
-color:var(--accent);
-}
+    .hero{
+      position:relative;
+      min-height:70vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:white;
+      overflow:hidden;
+    }
 
-nav{
-display:flex;
-gap:18px;
-font-size:14px;
-color:var(--muted);
-}
+    .hero img{
+      position:absolute;
+      inset:0;
+      z-index:-1;
+    }
 
-/* HERO */
+    .hero-overlay{
+      background:rgba(0,0,0,.45);
+      padding:60px;
+      border-radius:30px;
+      max-width:780px;
+      margin:20px;
+    }
 
-.hero{
-position:relative;
-height:70vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-color:white;
-overflow:hidden;
-}
+    .hero h1{
+      font-family:'Lora',serif;
+      font-size:clamp(2.5rem,5vw,4.2rem);
+      margin:0 0 18px;
+      line-height:1.1;
+    }
 
-.hero img{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-1;
-}
+    .hero p{
+      margin:0 auto;
+      max-width:620px;
+      font-size:1.08rem;
+    }
 
-.hero-overlay{
-background:rgba(0,0,0,.45);
-padding:60px;
-border-radius:30px;
-}
+    .hero-buttons{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:26px;
+    }
 
-.hero h1{
-font-family:'Lora',serif;
-font-size:clamp(2.6rem,5vw,4rem);
-margin-bottom:20px;
-}
+    .btn{
+      padding:14px 22px;
+      border-radius:999px;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-.hero-buttons{
-display:flex;
-gap:14px;
-justify-content:center;
-flex-wrap:wrap;
-}
+    .btn-primary{
+      background:var(--accent);
+      color:white;
+    }
 
-.btn{
-padding:14px 22px;
-border-radius:999px;
-font-weight:600;
-}
+    .btn-secondary{
+      background:white;
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.25);
+    }
 
-.btn-primary{
-background:var(--accent);
-color:white;
-}
+    .section{
+      padding:78px 0;
+    }
 
-.btn-secondary{
-background:white;
-color:black;
-}
+    .section-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+    }
 
-/* SECTIONS */
+    .label{
+      color:var(--accent);
+      text-transform:uppercase;
+      font-size:13px;
+      letter-spacing:.18em;
+      font-weight:700;
+      margin-bottom:10px;
+    }
 
-.section{
-padding:80px 0;
-}
+    h2{
+      font-family:'Lora',serif;
+      font-size:clamp(2rem,4vw,3rem);
+      margin:0 0 14px;
+      line-height:1.12;
+    }
 
-.section-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:50px;
-align-items:center;
-}
+    .section p{
+      margin:0 0 16px;
+      color:var(--muted);
+    }
 
-.label{
-color:var(--accent);
-text-transform:uppercase;
-font-size:13px;
-letter-spacing:.18em;
-font-weight:700;
-margin-bottom:10px;
-}
+    .image-card{
+      border-radius:var(--radius);
+      overflow:hidden;
+      aspect-ratio:16/10;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      transition:.3s;
+      background:var(--card);
+    }
 
-h2{
-font-family:'Lora',serif;
-font-size:clamp(2rem,4vw,3rem);
-margin-bottom:10px;
-}
+    .image-card img{
+      transition:transform .7s ease;
+    }
 
-/* IMAGE CARDS */
+    .image-card:hover img{
+      transform:scale(1.06);
+    }
 
-.image-card{
-border-radius:var(--radius);
-overflow:hidden;
-aspect-ratio:16/10;
-box-shadow:var(--shadow);
-cursor:pointer;
-transition:.3s;
-}
+    .image-card:hover{
+      box-shadow:0 30px 70px rgba(0,0,0,.18);
+    }
 
-.image-card img{
-transition:transform .7s ease;
-}
+    .feature-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:22px;
+    }
 
-.image-card:hover img{
-transform:scale(1.06);
-}
+    .feature{
+      background:white;
+      border:1px solid var(--line);
+      padding:16px;
+      border-radius:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,.04);
+    }
 
-.image-card:hover{
-box-shadow:0 30px 70px rgba(0,0,0,.18);
-}
+    .soft-block{
+      background:linear-gradient(180deg,#ece4d9 0%,#e8dfd3 100%);
+      border-radius:36px;
+      padding:34px;
+    }
 
-/* FLYER SPECIAL */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:20px;
+    }
 
-.flyer{
-border-radius:0;
-aspect-ratio:auto;
-box-shadow:0 20px 50px rgba(0,0,0,.25);
-}
+    .card{
+      background:white;
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,.08);
+    }
 
-.flyer img{
-object-fit:contain;
-background:white;
-}
+    .card h3{
+      font-family:'Lora',serif;
+      margin:0 0 10px;
+      font-size:1.35rem;
+    }
 
-/* FEATURES */
+    .card p{
+      margin:0;
+    }
 
-.feature-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-top:20px;
-}
+    .small-note{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
 
-.feature{
-background:white;
-border:1px solid var(--line);
-padding:16px;
-border-radius:16px;
-}
+    .contact-box{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:22px;
+      margin-top:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,.05);
+    }
 
-/* CARDS */
+    .contact-item{
+      margin-bottom:14px;
+    }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-margin-top:20px;
-}
+    .contact-item:last-child{
+      margin-bottom:0;
+    }
 
-.card{
-background:white;
-border-radius:18px;
-padding:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
+    .contact-label{
+      color:var(--accent);
+      text-transform:uppercase;
+      font-size:12px;
+      letter-spacing:.16em;
+      font-weight:700;
+      margin-bottom:4px;
+    }
 
-/* CONTACT */
+    .icon-links{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
 
-.contact-box{
-background:white;
-border:1px solid var(--line);
-border-radius:20px;
-padding:22px;
-margin-top:20px;
-}
+    .icon-link{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      background:white;
+      border:1px solid var(--line);
+      border-radius:999px;
+      text-decoration:none;
+      box-shadow:0 10px 25px rgba(39,31,24,.06);
+      font-weight:600;
+      color:#4f6671;
+    }
 
-.contact-item{
-margin-bottom:14px;
-}
+    .icon-link svg{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+    }
 
-/* FOOTER */
+    .flyer{
+      border-radius:0;
+      aspect-ratio:auto;
+      box-shadow:0 20px 50px rgba(0,0,0,.25);
+      background:white;
+    }
 
-.footer{
-background:var(--primary);
-color:white;
-padding:30px 0;
-margin-top:40px;
-}
+    .flyer img{
+      object-fit:contain;
+      background:white;
+    }
 
-/* MOBILE */
+    .footer{
+      background:var(--primary);
+      color:white;
+      padding:30px 0;
+      margin-top:20px;
+    }
 
-@media(max-width:900px){
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
 
-.section-grid{
-grid-template-columns:1fr;
-}
+    @media(max-width:900px){
+      .section-grid{
+        grid-template-columns:1fr;
+      }
 
-.cards{
-grid-template-columns:1fr;
-}
+      .cards{
+        grid-template-columns:1fr;
+      }
 
-.hero{
-height:60vh;
-}
+      .hero{
+        min-height:60vh;
+      }
 
-}
-
-</style>
+      .hero-overlay{
+        padding:36px 24px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header class="topbar">
-<div class="container topbar-inner">
-
-<div class="brand">
-<div class="brand-mark">◌</div>
-Odd Fellow 35 Concordia
-</div>
-
-<nav>
-<a href="#om">Om</a>
-<a href="#livet">Logeliv</a>
-<a href="#arrangementer">Arrangementer</a>
-<a href="#kontakt">Kontakt</a>
-</nav>
-
-</div>
-</header>
-
-<!-- HERO -->
-
-<section class="hero">
-
-<img src="billede1_bygning.png">
-
-<div class="hero-overlay">
-
-<h1>Nysgerrig på Odd Fellow i Slagelse?</h1>
-
-<div class="hero-buttons">
-<a class="btn btn-primary" href="#kontakt">Kontakt os</a>
-<a class="btn btn-secondary" href="#arrangementer">Se arrangement</a>
-</div>
-
-</div>
-
-</section>
-
-<!-- OM -->
-
-<section class="section" id="om">
-
-<div class="container section-grid">
-
-<div>
-
-<div class="label">Om logen</div>
-
-<h2>Et fællesskab med historie</h2>
-
-<p>Odd Fellow Ordenen er en international orden med mere end 200 års historie.</p>
-
-<div class="feature-grid">
-
-<div class="feature">Venskab</div>
-<div class="feature">Personlig udvikling</div>
-<div class="feature">Fortrolighed</div>
-<div class="feature">Lokalt fællesskab</div>
-
-</div>
-
-</div>
-
-<div class="image-card">
-<img src="billede2_bibliotekstue.png">
-</div>
-
-</div>
-
-</section>
-
-<!-- LIVET -->
-
-<section class="section" id="livet">
-
-<div class="container section-grid">
-
-<div>
-
-<div class="label">Livet i logen</div>
-
-<h2>En typisk aften</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Logemøde</h3>
-<p>Refleksion over værdier og livet.</p>
-</div>
-
-<div class="card">
-<h3>Foredrag</h3>
-<p>Oplæg og inspiration.</p>
-</div>
-
-<div class="card">
-<h3>Samvær</h3>
-<p>Gode samtaler og fællesskab.</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="image-card">
-<img src="billede3_rundtbord.png">
-</div>
-
-</div>
-
-</section>
-
-<!-- FÆLLESSKAB -->
-
-<section class="section">
-
-<div class="container section-grid">
-
-<div>
-
-<div class="label">Fællesskab</div>
-
-<h2>Ro og gode samtaler</h2>
-
-<p>Logen er et sted hvor relationer udvikles over tid.</p>
-
-</div>
-
-<div class="image-card">
-<img src="billede4_samtale.png">
-</div>
-
-</div>
-
-</section>
-
-<!-- ARRANGEMENT -->
-
-<section class="section" id="arrangementer">
-
-<div class="container section-grid">
-
-<div>
-
-<div class="label">Arrangement</div>
-
-<h2>Sct. Patrick's Day</h2>
-
-<div class="contact-box">
-
-<div class="contact-item">
-Fredag d. 20 marts
-</div>
-
-<div class="contact-item">
-Live musik · Mad · Drikkevarer
-</div>
-
-<div class="contact-item">
-<a href="https://www.facebook.com/events/1629155851768043">Se begivenhed</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="image-card flyer">
-<img src="billede5_flyer.png">
-</div>
-
-</div>
-
-</section>
-
-<!-- KONTAKT -->
-
-<section class="section" id="kontakt">
-
-<div class="container section-grid">
-
-<div>
-
-<div class="label">Kontakt</div>
-
-<h2>Tag kontakt eller følg med</h2>
-
-<div class="contact-box">
-
-<div class="contact-item">
-Frederiksgade 15<br>
-4200 Slagelse
-</div>
-
-<div class="contact-item">
-<a href="mailto:om35@concordia.oddfellow.dk">Send mail</a>
-</div>
-
-<div class="contact-item">
-<a href="https://www.facebook.com/groups/oddfellowslagelse">Facebook</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="image-card">
-<img src="samtale.png">
-</div>
-
-</div>
-
-</section>
-
-<footer class="footer">
-
-<div class="container">
-Broderloge nr. 35 Concordia · Slagelse
-</div>
-
-</footer>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">◌</div>
+        <span>Odd Fellow 35 Concordia</span>
+      </div>
+
+      <nav>
+        <a href="#om">Om logen</a>
+        <a href="#livet">Livet i logen</a>
+        <a href="#faellesskab">Fællesskab</a>
+        <a href="#arrangementer">Arrangementer</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <img src="billede1_bygning.png" alt="Odd Fellow bygningen i Slagelse">
+
+      <div class="hero-overlay">
+        <h1>Nysgerrig på Odd Fellow i Slagelse?</h1>
+        <p>
+          Midt i Slagelse mødes vi hver uge til fællesskab, gode samtaler og refleksion.
+          Hos Broderloge nr. 35 Concordia finder du et fællesskab med plads til både
+          eftertanke, relationer og menneskelig udvikling.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#kontakt">Kontakt os</a>
+          <a class="btn btn-secondary" href="#arrangementer">Se arrangement</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="om">
+      <div class="container section-grid">
+
+        <div>
+          <div class="label">Om logen</div>
+          <h2>Et fællesskab med historie og værdier</h2>
+
+          <p>
+            Odd Fellow Ordenen er en international orden med mere end 200 års historie.
+            I Danmark er ordenen organiseret under Den Uafhængige Storloge for Kongeriget
+            Danmark – I.O.O.F.
+          </p>
+
+          <p>
+            I Broderloge nr. 35 Concordia i Slagelse mødes mænd med forskellige baggrunde,
+            erfaringer og livshistorier. Aldersspændet er bredt, og netop det giver plads
+            til nye perspektiver, gode samtaler og relationer på tværs af generationer.
+          </p>
+
+          <p>
+            Formålet er ikke blot at mødes af vane. Vi mødes for at udvikle os som mennesker,
+            for at styrke relationer og for at skabe et fortroligt fællesskab, hvor der også
+            er plads til eftertanke, humor og nærvær.
+          </p>
+
+          <div class="feature-grid">
+            <div class="feature">Venskab og fortrolighed</div>
+            <div class="feature">Etik og personlig udvikling</div>
+            <div class="feature">Respekt for forskellighed</div>
+            <div class="feature">Et lokalt fællesskab med dybe rødder</div>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="billede2_bibliotekstue.png" alt="Mænd ved bord i bibliotekstue">
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="livet">
+      <div class="container soft-block">
+        <div class="section-grid">
+
+          <div>
+            <div class="label">Livet i logen</div>
+            <h2>En typisk aften i Concordia</h2>
+
+            <p>
+              Vi holder logemøde hver onsdag i vores logebygning i Slagelse.
+              En aften i logen består som regel af flere dele, som tilsammen skaber
+              en rytme mellem fordybelse, inspiration og samvær.
+            </p>
+
+            <div class="cards">
+              <div class="card">
+                <h3>Logemøde</h3>
+                <p>Her arbejder vi med ordens værdier og refleksioner over livet, mennesket og det ansvar, vi har over for hinanden.</p>
+              </div>
+
+              <div class="card">
+                <h3>Foredrag</h3>
+                <p>Vi holder jævnligt foredrag eller oplæg om aktuelle, kulturelle eller personlige emner, som giver stof til eftertanke og samtale.</p>
+              </div>
+
+              <div class="card">
+                <h3>Samvær</h3>
+                <p>Efter mødet samles vi til en lettere anretning. Her får samtalerne lov at fortsætte i mere uformelle rammer.</p>
+              </div>
+            </div>
+
+            <div class="small-note">
+              Møderne afsluttes normalt omkring kl. 23.00.
+              Der holdes ikke ordinære møder i perioden 16. maj – 31. august samt 16. december – 2. januar.
+            </div>
+          </div>
+
+          <div class="image-card">
+            <img src="billede3_rundtbord.png" alt="Mange mænd omkring bord">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faellesskab">
+      <div class="container section-grid">
+
+        <div>
+          <div class="label">Fællesskab</div>
+          <h2>Ro, relationer og gode samtaler</h2>
+
+          <p>
+            For mange bliver logen et fast holdepunkt i en travl hverdag.
+            Her er der plads til gode samtaler, venskaber, refleksion og fællesskab
+            i rammer, hvor man mødes med respekt og fortrolighed.
+          </p>
+
+          <p>
+            Relationerne opstår over tid. Det særlige ved logen er, at man lærer hinanden
+            at kende gennem mange møder og mange samtaler. Det skaber en anden form for
+            nærhed end i mere overfladiske fællesskaber.
+          </p>
+
+          <p>
+            Man behøver ikke kende alt til ordenen på forhånd for at være nysgerrig.
+            Det vigtigste er lysten til fællesskab, eftertanke og menneskelig kontakt.
+          </p>
+        </div>
+
+        <div class="image-card">
+          <img src="billede4_samtale.png" alt="Tre mænd i samtale">
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="arrangementer">
+      <div class="container section-grid">
+
+        <div>
+          <div class="label">Arrangementer</div>
+          <h2>Næste arrangement</h2>
+
+          <div class="contact-box">
+            <div class="contact-item">
+              <div class="contact-label">Arrangement</div>
+              <div><strong>Sct. Patrick’s Day i Slagelse</strong></div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Beskrivelse</div>
+              <div>
+                Broderloge nr. 35 Concordia inviterer til en stemningsfuld aften med musik,
+                fællesskab og irsk inspiration.
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Tid og sted</div>
+              <div>
+                Fredag d. 20. marts · Kl. 16.00–23.00<br>
+                Odd Fellow Bygningen, Frederiksgade 15, 4200 Slagelse
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Det kan du forvente</div>
+              <div>
+                Live musik · Salg af drikkevarer hele aftenen · Mulighed for at købe lidt mad · Gratis adgang
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Link</div>
+              <div>
+                <a href="https://www.facebook.com/events/1629155851768043?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22external%22%7D%2C%7B%22mechanism%22%3A%22your_upcoming_events_unit%22%2C%22surface%22%3A%22bookmark%22%7D]%2C%22ref_notif_type%22%3Anull%7D" target="_blank" rel="noopener noreferrer">Se begivenhed på Facebook</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-card flyer">
+          <img src="billede5_flyer.png" alt="Flyer for Sct. Patrick’s Day">
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="container section-grid">
+
+        <div>
+          <div class="label">Kontakt</div>
+          <h2>Tag kontakt eller følg med</h2>
+
+          <p>
+            Hvis du er blevet nysgerrig på logen, er du velkommen til at kontakte os
+            eller følge med på Facebook.
+          </p>
+
+          <div class="contact-box">
+            <div class="contact-item">
+              <div class="contact-label">Adresse</div>
+              <div>
+                Frederiksgade 15<br>
+                4200 Slagelse
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Direkte kontakt</div>
+              <div class="icon-links">
+                <a class="icon-link" href="mailto:om35@concordia.oddfellow.dk" aria-label="Send mail">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16v16H4z"></path>
+                    <path d="m4 7 8 6 8-6"></path>
+                  </svg>
+                  Mail
+                </a>
+
+                <a class="icon-link" href="https://www.facebook.com/groups/oddfellowslagelse" target="_blank" rel="noopener noreferrer" aria-label="Åbn Facebook">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.7-1.6H16.7V4.8c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.3V11H7.3v3h2.8v8h3.4z"/>
+                  </svg>
+                  Facebook
+                </a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Officiel side</div>
+              <div>
+                <a href="https://concordia.oddfellow.dk/" target="_blank" rel="noopener noreferrer">Åbn Concordias officielle side</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="samtale.png" alt="Stemningsbillede fra logen">
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>Broderloge nr. 35 Concordia · Slagelse</div>
+    </div>
+  </footer>
 
 </body>
 </html>
