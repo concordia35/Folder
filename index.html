@@ -558,5 +558,15 @@
       <small></small>
     </div>
   </footer>
+
+  <script>
+  window.addEventListener("load", function() {
+    if (window.location.hash === "#om") {
+      history.replaceState(null, null, " ");
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  });
+  </script>
+
 </body>
 </html>
