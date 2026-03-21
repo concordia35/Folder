@@ -259,12 +259,125 @@
       margin-top:26px;
     }
     .feature{
+      position:relative;
       background:#fff;
       border:1px solid var(--line);
       border-radius:18px;
-      padding:18px;
+      padding:18px 52px 18px 18px;
       box-shadow:0 10px 25px rgba(39,31,24,.05);
       font-weight:500;
+      cursor:pointer;
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+    }
+    .feature::after{
+      content:"+";
+      position:absolute;
+      top:50%;
+      right:18px;
+      transform:translateY(-50%);
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      background:rgba(124,47,57,.08);
+      color:var(--accent);
+      font-size:1.1rem;
+      font-weight:700;
+      transition:transform .22s ease, background .22s ease, color .22s ease;
+    }
+    .feature:hover,
+    .feature:focus-visible{
+      transform:translateY(-4px);
+      box-shadow:0 18px 36px rgba(39,31,24,.10);
+      border-color:rgba(124,47,57,.22);
+      background:#fffefd;
+      outline:none;
+    }
+    .feature:hover::after,
+    .feature:focus-visible::after{
+      transform:translateY(-50%) scale(1.06);
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(24,20,18,.22);
+      backdrop-filter:blur(2px);
+      -webkit-backdrop-filter:blur(2px);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      padding:20px;
+      transition:opacity .28s ease, visibility .28s ease, background .28s ease;
+    }
+    .modal.active{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      background:rgba(24,20,18,.48);
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+    }
+    .modal-box{
+      position:relative;
+      background:#fffdf9;
+      border:1px solid rgba(222,212,202,.92);
+      border-radius:24px;
+      box-shadow:0 30px 80px rgba(20,16,14,.24);
+      width:min(100%, 640px);
+      max-height:min(85vh, 760px);
+      overflow:auto;
+      padding:34px 30px 30px;
+      opacity:0;
+      transform:translateY(18px) scale(.985);
+      transition:opacity .34s cubic-bezier(.2,.7,.2,1), transform .34s cubic-bezier(.2,.7,.2,1);
+    }
+    .modal.active .modal-box{
+      opacity:1;
+      transform:translateY(0) scale(1);
+    }
+    .modal-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:40px;
+      height:40px;
+      border:none;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background:rgba(124,47,57,.08);
+      color:var(--accent);
+      cursor:pointer;
+      font-size:1.2rem;
+      line-height:1;
+      transition:transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .modal-close:hover,
+    .modal-close:focus-visible{
+      background:var(--accent);
+      color:#fff;
+      transform:scale(1.05);
+      outline:none;
+    }
+    .modal-box h3{
+      font-size:1.6rem;
+      margin-bottom:14px;
+      padding-right:48px;
+    }
+    .modal-box p{
+      color:var(--muted);
+      font-size:1.02rem;
+      line-height:1.75;
+      margin:0;
+      white-space:pre-line;
     }
 
     .soft-block{
@@ -415,10 +528,10 @@
           <p>Formålet er ikke blot at mødes af vane. Vi mødes for at udvikle os som mennesker, for at styrke relationer og for at skabe et fortroligt fællesskab, hvor der også er plads til eftertanke, humor og nærvær.</p>
 
           <div class="feature-grid">
-            <div class="feature">Venskab og fortrolighed</div>
-            <div class="feature">Etik og personlig udvikling</div>
-            <div class="feature">Respekt for forskellighed</div>
-            <div class="feature">Et lokalt fællesskab med dybe rødder</div>
+            <div class="feature" onclick="openModal('venskab')">Venskab og fortrolighed</div>
+            <div class="feature" onclick="openModal('etik')">Etik og personlig udvikling</div>
+            <div class="feature" onclick="openModal('respekt')">Respekt for forskellighed</div>
+            <div class="feature" onclick="openModal('lokalt')">Et lokalt fællesskab med dybe rødder</div>
           </div>
         </div>
 
@@ -568,7 +681,73 @@
     </div>
   </footer>
 
+  <div class="modal" id="featureModal" onclick="closeModal(event)" aria-hidden="true">
+    <div class="modal-box" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="featureModalTitle">
+      <button class="modal-close" type="button" aria-label="Luk popup" onclick="closeModal()">✕</button>
+      <h3 id="featureModalTitle"></h3>
+      <p id="featureModalText"></p>
+    </div>
+  </div>
+
   <script>
+  const modalContent = {
+    venskab: {
+      title: "Venskab og fortrolighed",
+      text: `I logen opstår venskaber, der rækker ud over det sædvanlige.
+Her mødes vi i respekt og tillid, hvor der er plads til ærlige samtaler og forskelligheder.
+
+Fortroligheden skaber trygge rammer, hvor man kan være sig selv –
+og venskaber, der varer ved.`
+    },
+    etik: {
+      title: "Etik og personlig udvikling",
+      text: `I logen arbejder vi med refleksion og værdier, der giver retning i hverdagen.
+Gennem samtaler, traditioner og eftertanke udvikler vi os – ikke for at blive perfekte, men for at blive mere bevidste mennesker.
+
+Det er en personlig rejse, hvor man hele tiden kan vokse.`
+    },
+    respekt: {
+      title: "Respekt for forskellighed",
+      text: `Vi er forskellige – i alder, baggrund og livssyn.
+Netop derfor mødes vi med nysgerrighed og respekt for hinandens perspektiver.
+
+I logen er der plads til at være sig selv, og styrken ligger i det, vi ikke er ens om.`
+    },
+    lokalt: {
+      title: "Et lokalt fællesskab med dybe rødder",
+      text: `Logen er en del af lokalmiljøet og bygger på mange års historie og traditioner.
+Her mødes mennesker med tilknytning til området i et fællesskab, der både rækker bagud og fremad.
+
+Det er et sted, hvor relationer skabes – og føres videre.`
+    }
+  };
+
+  function openModal(key) {
+    const modal = document.getElementById("featureModal");
+    const title = document.getElementById("featureModalTitle");
+    const text = document.getElementById("featureModalText");
+    const content = modalContent[key];
+    if (!content) return;
+    title.textContent = content.title;
+    text.textContent = content.text;
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("featureModal");
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      closeModal();
+    }
+  });
+
   window.addEventListener("load", function() {
     if (window.location.hash === "#om") {
       history.replaceState(null, null, " ");
