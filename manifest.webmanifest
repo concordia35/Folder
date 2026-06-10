@@ -1,0 +1,38 @@
+{
+  "name": "Broderloge nr. 35 Concordia · Folder",
+  "short_name": "Concordia",
+  "description": "Kort mobilvenlig informationsfolder for Broderloge nr. 35 Concordia i Slagelse.",
+  "lang": "da-DK",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f1eb",
+  "theme_color": "#607884",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Kontakt",
+      "short_name": "Kontakt",
+      "url": "./index.html#kontakt"
+    },
+    {
+      "name": "QR-kode",
+      "short_name": "QR",
+      "url": "./index.html#qr"
+    }
+  ]
+}
