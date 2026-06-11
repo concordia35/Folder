@@ -1,4 +1,4 @@
-const CACHE_NAME = "concordia-folder-v6";
+const CACHE_NAME = "concordia-folder-v7";
 const ASSETS = [
   "./",
   "./index.html",
@@ -11,7 +11,7 @@ const ASSETS = [
   "./logo.png",
   "./kaedeled.png",
   "./samtale.png",
-  "./qr.png",
+  "./qrv1.png",
   "./billede1_bygning.png",
   "./billede2_bibliotekstue.png",
   "./billede3_rundtbord.png",
