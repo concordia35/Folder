@@ -1,10 +1,13 @@
-const CACHE_NAME = "concordia-folder-v1";
+const CACHE_NAME = "concordia-folder-v5";
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./icon-192.png",
   "./icon-512.png",
+  "./apple-touch-icon.png",
+  "./favicon-32.png",
+  "./app-icon-master.png",
   "./logo.png",
   "./kaedeled.png",
   "./samtale.png",

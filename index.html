@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Broderloge nr. 35 Concordia · Slagelse</title>
 
-  <meta name="theme-color" content="#607884" />
+  <meta name="theme-color" content="#7c2f39" />
   <meta name="application-name" content="Concordia Folder" />
+  <meta name="msapplication-TileColor" content="#7c2f39" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Concordia" />
+  <meta name="apple-mobile-web-app-title" content="Folder" />
   <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
@@ -77,6 +79,12 @@
       gap:16px;
       width:100%;
     }
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
     .brand{
       display:flex;
       align-items:center;
@@ -137,6 +145,39 @@
       width:16px;
       height:16px;
       flex:0 0 16px;
+    }
+    .mobile-menu-btn{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(96,120,132,.22);
+      background:rgba(255,253,249,.70);
+      color:#4f6671;
+      font:inherit;
+      font-size:13px;
+      font-weight:700;
+      line-height:1;
+      white-space:nowrap;
+      cursor:pointer;
+      transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
+    }
+    .mobile-menu-btn:hover,
+    .mobile-menu-btn:focus-visible{
+      background:#fff;
+      border-color:rgba(96,120,132,.38);
+      transform:translateY(-1px);
+      outline:none;
+    }
+    .mobile-menu-btn svg{
+      width:17px;
+      height:17px;
+      flex:0 0 17px;
+    }
+    .mobile-nav{
+      display:none;
     }
 
     .hero{
@@ -500,33 +541,44 @@
 
 
     .install-app-btn{
-      display:none;
+      display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding:8px 12px;
+      justify-content:center;
+      gap:9px;
+      padding:12px 16px;
       border-radius:999px;
-      color:#4f6671;
-      border:1px solid rgba(96,120,132,.22);
-      background:rgba(255,255,255,.55);
+      color:#fff;
+      border:1px solid var(--primary);
+      background:var(--primary);
       font:inherit;
-      font-size:13px;
-      font-weight:700;
+      font-size:14px;
+      font-weight:800;
       line-height:1;
       white-space:nowrap;
       cursor:pointer;
-      transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
+      box-shadow:0 12px 24px rgba(79,102,113,.18);
+      transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease;
     }
-    .install-app-btn.visible{display:inline-flex}
-    .install-app-btn:hover{
-      background:var(--primary);
+    .install-app-btn:hover,
+    .install-app-btn:focus-visible{
+      background:var(--accent);
+      border-color:var(--accent);
       color:#fff;
-      border-color:var(--primary);
       transform:translateY(-1px);
+      box-shadow:0 16px 30px rgba(124,47,57,.20);
+      outline:none;
     }
     .install-app-btn svg{
-      width:16px;
-      height:16px;
-      flex:0 0 16px;
+      width:17px;
+      height:17px;
+      flex:0 0 17px;
+    }
+    .native-install-btn{
+      display:none;
+      margin-top:18px;
+    }
+    .native-install-btn.visible{
+      display:inline-flex;
     }
 
     .qr-section{
@@ -572,6 +624,49 @@
       color:var(--muted);
       font-size:.92rem;
     }
+    .qr-actions{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:12px;
+      margin-top:22px;
+    }
+    .qr-actions-note{
+      margin:0;
+      color:var(--muted);
+      font-size:.94rem;
+      line-height:1.55;
+    }
+    .install-guide-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:20px;
+    }
+    .install-guide-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 10px 22px rgba(39,31,24,.06);
+    }
+    .install-guide-card h4{
+      margin:0 0 10px;
+      color:var(--primary);
+      font-size:1.02rem;
+    }
+    .install-guide-card ol{
+      margin:0;
+      padding-left:20px;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:.98rem;
+    }
+    .install-guide-note{
+      margin-top:18px !important;
+      font-size:.96rem !important;
+      line-height:1.65 !important;
+    }
 
     .footer{
       margin-top:44px;
@@ -604,20 +699,52 @@
       }
     }
     @media (max-width: 680px){
-      .topbar-inner{gap:12px}
+      .container{width:min(calc(100% - 24px), var(--max))}
+      .topbar-inner{gap:0;padding:10px 0}
       .topbar-row{align-items:center}
-      .brand{gap:10px;font-size:13px;letter-spacing:.14em}
+      .brand{gap:9px;font-size:12px;letter-spacing:.13em}
       .brand-mark,
-      .brand-mark img{width:34px;height:34px}
-      .nav{gap:10px 14px}
-      .nav a{font-size:14px}
+      .brand-mark img{width:32px;height:32px}
+      .nav{display:none}
+      .header-actions{gap:8px}
       .ig-header-btn{padding:7px 10px;font-size:12px;gap:6px}
       .ig-header-btn svg{width:15px;height:15px;flex-basis:15px}
+      .mobile-menu-btn{display:inline-flex;padding:7px 10px;font-size:12px}
+      .mobile-nav{
+        display:none;
+        margin-top:10px;
+        padding:10px;
+        background:rgba(255,253,249,.96);
+        border:1px solid rgba(222,212,202,.86);
+        border-radius:20px;
+        box-shadow:0 18px 36px rgba(39,31,24,.12);
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+      }
+      .mobile-nav.open{display:grid}
+      .mobile-nav a{
+        display:flex;
+        align-items:center;
+        min-height:42px;
+        padding:10px 12px;
+        border-radius:14px;
+        color:var(--muted);
+        background:rgba(245,241,235,.72);
+        font-size:14px;
+        font-weight:600;
+      }
+      .mobile-nav a:active{
+        background:rgba(124,47,57,.08);
+        color:var(--accent);
+      }
       .feature-grid{grid-template-columns:1fr}
 
       .qr-section{padding:42px 0 52px}
       .qr-card{padding:22px;border-radius:24px}
       .qr-frame{width:min(100%, 260px);justify-self:center}
+      .qr-actions{align-items:stretch;flex-direction:column}
+      .install-app-btn{width:100%}
+      .install-guide-grid{grid-template-columns:1fr}
       h1,h2{max-width:none}
       .hero{
         padding:84px 0 68px;
@@ -640,33 +767,43 @@
         </div>
 
 
-        <button class="install-app-btn" id="installAppBtn" type="button" aria-label="Installer folderen som webapp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 3v12"></path>
-            <path d="m7 10 5 5 5-5"></path>
-            <path d="M5 21h14"></path>
-          </svg>
-          <span>Installer</span>
-        </button>
+        <div class="header-actions">
+          <a class="ig-header-btn" href="https://www.instagram.com/oddfellow.concordia35/" target="_blank" rel="noopener noreferrer" aria-label="Åbn Instagram" onclick="gtag('event', 'instagram_click', {'event_category': 'social', 'event_label': 'header_instagram'});">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1"></circle>
+            </svg>
+            <span>Følg med</span>
+          </a>
 
-        <a class="ig-header-btn" href="https://www.instagram.com/oddfellow.concordia35/" target="_blank" rel="noopener noreferrer" aria-label="Åbn Instagram" onclick="gtag('event', 'instagram_click', {'event_category': 'social', 'event_label': 'header_instagram'});">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
-            <circle cx="12" cy="12" r="4"></circle>
-            <circle cx="17.5" cy="6.5" r="1"></circle>
-          </svg>
-          <span>Følg med</span>
-        </a>
+          <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Åbn menu">
+            <span>Menu</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 7h16"></path>
+              <path d="M4 12h16"></path>
+              <path d="M4 17h16"></path>
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Hovedmenu">
         <a href="#om">Om logen</a>
         <a href="#medlemskab">Er du nysgerrig?</a>
         <a href="#livet">Livet i logen</a>
         <a href="#velgørenhed">Velgørenhed</a>
         <a href="#arrangementer">Arrangementer</a>
         <a href="#kontakt">Kontakt</a>
-        <a href="#qr">QR-kode</a>
+      </nav>
+
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobilmenu">
+        <a href="#om">Om logen</a>
+        <a href="#medlemskab">Er du nysgerrig?</a>
+        <a href="#livet">Livet i logen</a>
+        <a href="#velgørenhed">Velgørenhed</a>
+        <a href="#arrangementer">Arrangementer</a>
+        <a href="#kontakt">Kontakt</a>
       </nav>
     </div>
   </header>
@@ -894,9 +1031,19 @@
         <div class="qr-card">
           <div>
             <div class="label">Del folderen</div>
-            <h2>Scan og få folderen med hjem</h2>
-            <p>Medlemmer kan hurtigt vise folderen direkte fra telefonen. Er nogen nysgerrige, kan de scanne QR-koden og åbne siden på deres egen telefon med det samme.</p>
-            <p>Billedfilen skal hedde <strong>qr.png</strong> og ligge i samme mappe som <strong>index.html</strong>.</p>
+            <h2>Scan og tag folderen med hjem</h2>
+            <p>Folderen kan også gemmes på hjemmeskærmen som en lille webapp, så den er let at finde igen.</p>
+            <div class="qr-actions">
+              <button class="install-app-btn" id="installAppBtn" type="button" aria-label="Se hvordan folderen installeres som webapp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3v12"></path>
+                  <path d="m7 10 5 5 5-5"></path>
+                  <path d="M5 21h14"></path>
+                </svg>
+                <span>Gem som app</span>
+              </button>
+              <p class="qr-actions-note">Virker på både Android og iPhone.</p>
+            </div>
           </div>
 
           <div class="qr-frame">
@@ -925,7 +1072,59 @@
     </div>
   </div>
 
+  <div class="modal" id="installGuideModal" onclick="closeInstallGuide(event)" aria-hidden="true">
+    <div class="modal-box" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="installGuideTitle">
+      <button class="modal-close" type="button" aria-label="Luk installationsvejledning" onclick="closeInstallGuide()">✕</button>
+      <h3 id="installGuideTitle">Gem folderen som app</h3>
+      <p>Så ligger folderen på hjemmeskærmen og kan åbnes hurtigt uden at lede efter linket igen.</p>
+
+      <div class="install-guide-grid">
+        <div class="install-guide-card">
+          <h4>Android</h4>
+          <ol>
+            <li>Tryk på <strong>Installer automatisk</strong>, hvis knappen vises.</li>
+            <li>Ellers: tryk på menuen med de tre prikker i Chrome.</li>
+            <li>Vælg <strong>Installer app</strong> eller <strong>Føj til startskærm</strong>.</li>
+          </ol>
+        </div>
+        <div class="install-guide-card">
+          <h4>iPhone</h4>
+          <ol>
+            <li>Åbn siden i Safari.</li>
+            <li>Tryk på del-knappen.</li>
+            <li>Vælg <strong>Føj til hjemmeskærm</strong> og tryk <strong>Tilføj</strong>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <p class="install-guide-note">På iPhone kommer der ikke en automatisk installer-knap. Det er Apple, der gør det lidt mere bøvlet.</p>
+      <button class="install-app-btn native-install-btn" id="nativeInstallBtn" type="button">Installer automatisk</button>
+    </div>
+  </div>
+
   <script>
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileNav = document.getElementById("mobileNav");
+
+    function closeMobileMenu() {
+      if (!mobileMenuBtn || !mobileNav) return;
+      mobileNav.classList.remove("open");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
+      mobileMenuBtn.setAttribute("aria-label", "Åbn menu");
+    }
+
+    if (mobileMenuBtn && mobileNav) {
+      mobileMenuBtn.addEventListener("click", function () {
+        const isOpen = mobileNav.classList.toggle("open");
+        mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
+        mobileMenuBtn.setAttribute("aria-label", isOpen ? "Luk menu" : "Åbn menu");
+      });
+
+      mobileNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", closeMobileMenu);
+      });
+    }
+
     const modalContent = {
       venskab: {
         title: "Venskab og fortrolighed",
@@ -983,36 +1182,62 @@ Det er et sted, hvor relationer skabes – og føres videre.`
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") {
         closeModal();
+        closeInstallGuide();
+        closeMobileMenu();
       }
     });
 
 
     let deferredInstallPrompt = null;
     const installAppBtn = document.getElementById("installAppBtn");
+    const nativeInstallBtn = document.getElementById("nativeInstallBtn");
+
+    function openInstallGuide() {
+      const modal = document.getElementById("installGuideModal");
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeInstallGuide() {
+      const modal = document.getElementById("installGuideModal");
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    async function runNativeInstallPrompt() {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      if (nativeInstallBtn) {
+        nativeInstallBtn.classList.remove("visible");
+      }
+    }
 
     window.addEventListener("beforeinstallprompt", function (event) {
       event.preventDefault();
       deferredInstallPrompt = event;
-      if (installAppBtn) {
-        installAppBtn.classList.add("visible");
+      if (nativeInstallBtn) {
+        nativeInstallBtn.classList.add("visible");
       }
     });
 
     if (installAppBtn) {
-      installAppBtn.addEventListener("click", async function () {
-        if (!deferredInstallPrompt) return;
-        deferredInstallPrompt.prompt();
-        await deferredInstallPrompt.userChoice;
-        deferredInstallPrompt = null;
-        installAppBtn.classList.remove("visible");
-      });
+      installAppBtn.addEventListener("click", openInstallGuide);
+    }
+
+    if (nativeInstallBtn) {
+      nativeInstallBtn.addEventListener("click", runNativeInstallPrompt);
     }
 
     window.addEventListener("appinstalled", function () {
       deferredInstallPrompt = null;
-      if (installAppBtn) {
-        installAppBtn.classList.remove("visible");
+      if (nativeInstallBtn) {
+        nativeInstallBtn.classList.remove("visible");
       }
+      closeInstallGuide();
     });
 
     if ("serviceWorker" in navigator) {
