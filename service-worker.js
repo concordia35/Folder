@@ -1,4 +1,4 @@
-const CACHE_NAME = "concordia-folder-v5";
+const CACHE_NAME = "concordia-folder-v6";
 const ASSETS = [
   "./",
   "./index.html",
@@ -17,7 +17,8 @@ const ASSETS = [
   "./billede3_rundtbord.png",
   "./billede4_samtale.png",
   "./billede5_flyer.png",
-  "./billede6_velgorenhed.png"
+  "./billede6_velgorenhed.png",
+  "./loppemarked-22-august.png"
 ];
 
 self.addEventListener("install", event => {
