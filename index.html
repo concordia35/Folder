@@ -637,6 +637,38 @@
       font-size:.94rem;
       line-height:1.55;
     }
+    .visit-section{
+      padding:18px 0 26px;
+    }
+    .visit-card{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:28px;
+      align-items:center;
+      padding:34px 38px;
+      border-radius:30px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--accent) 0%,#63232c 100%);
+      box-shadow:0 20px 42px rgba(91,31,39,.22);
+    }
+    .visit-card .label{color:rgba(255,255,255,.76)}
+    .visit-card h2{
+      margin-top:7px;
+      max-width:18ch;
+      color:#fff;
+    }
+    .visit-card p{
+      margin:14px 0 0;
+      max-width:65ch;
+      color:rgba(255,255,255,.88);
+      font-size:1.03rem;
+    }
+    .visit-card .btn{
+      background:#fff;
+      color:var(--accent);
+      white-space:nowrap;
+      box-shadow:0 12px 26px rgba(39,31,24,.18);
+    }
     .install-guide-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -745,6 +777,9 @@
       .qr-actions{align-items:stretch;flex-direction:column}
       .install-app-btn{width:100%}
       .install-guide-grid{grid-template-columns:1fr}
+      .visit-section{padding:10px 0 20px}
+      .visit-card{grid-template-columns:1fr;padding:26px 22px;border-radius:24px}
+      .visit-card .btn{width:100%}
       h1,h2{max-width:none}
       .hero{
         padding:84px 0 68px;
@@ -977,6 +1012,19 @@
       </div>
     </section>
 
+    <section class="visit-section" aria-labelledby="naeste-besoeg">
+      <div class="container">
+        <div class="visit-card">
+          <div>
+            <div class="label">Næste mulighed for at besøge os</div>
+            <h2 id="naeste-besoeg">Onsdag den 30. september</h2>
+            <p>Kom indenfor i logen, få et gratis måltid mad, mød brødrene og hør mere om fællesskabet. Du er også velkommen til at tage en ven med. Det foregår i Frederiksgade 15, 4200 Slagelse.</p>
+          </div>
+          <a class="btn" href="mailto:info35@concordia.oddfellow.dk?subject=Jeg%20vil%20gerne%20bes%C3%B8ge%20logen%20den%2030.%20september&body=Hej%0A%0AJeg%20vil%20gerne%20h%C3%B8re%20mere%20om%20muligheden%20for%20at%20bes%C3%B8ge%20logen%20den%2030.%20september.%0A%0ANavn%3A%0ATelefonnummer%3A" onclick="gtag('event', 'visit_interest_click', {'event_category': 'contact', 'event_label': '30_september'});">Jeg vil gerne høre mere</a>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="kontakt">
       <div class="container section-grid">
         <div>
@@ -1058,6 +1106,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
