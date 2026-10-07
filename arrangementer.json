@@ -3,24 +3,20 @@
     {
       "active": true,
       "label": "Arrangementer",
-      "title": "Oktoberfest i logen",
-      "intro": "Glæd dig til en festlig oktoberfest i logen med mad, musik, øl og god stemning. Den endelige dato og de øvrige praktiske oplysninger bliver offentliggjort senere.",
+      "title": "Noget spændende er på vej",
+      "intro": "Vi arbejder på et nyt arrangement i logen. Vi kan ikke løfte sløret for detaljerne endnu, men der er noget spændende i vente.",
       "details": [
         {
-          "label": "Arrangement",
-          "value": "Oktoberfest i logen – en hyggelig aften med festlig stemning og klassisk oktoberfest."
+          "label": "Hvad sker der?",
+          "value": "Planlægningen er i gang, og vi glæder os til snart at kunne fortælle mere."
         },
         {
-          "label": "Tid og sted",
-          "value": "Oktober – endelig dato følger. Logen, Frederiksgade 15, 4200 Slagelse."
+          "label": "Dato og program",
+          "value": "Der er endnu ikke fastsat en officiel dato eller et endeligt program."
         },
         {
-          "label": "Det kan du forvente",
-          "value": "Mad, musik, øl og god stemning i hyggelige rammer."
-        },
-        {
-          "label": "Mere information",
-          "value": "Dato, program og information om billetter offentliggøres senere."
+          "label": "Hold dig opdateret",
+          "value": "Nye oplysninger bliver offentliggjort her, så snart de er på plads."
         }
       ],
       "link": {
@@ -28,18 +24,18 @@
         "text": "Følg med i Facebook-gruppen",
         "url": "https://www.facebook.com/groups/oddfellowslagelse"
       },
-      "image": "oktoberfest.webp",
-      "imageAlt": "Oktoberfest i logen med mad, musik, øl og god stemning"
+      "image": "noget-spaendende-er-paa-vej.webp",
+      "imageAlt": "En åben dør til en stemningsfuld logesal med teksten Noget spændende er på vej"
     }
   ],
   "besoeg": {
-    "active": true,
+    "active": false,
     "label": "Næste mulighed for at besøge os",
-    "title": "Onsdag den 30. september",
-    "text": "Kom indenfor i logen, få et gratis måltid mad, mød brødrene og hør mere om fællesskabet. Du er også velkommen til at tage en ven med. Det foregår i Frederiksgade 15, 4200 Slagelse.",
+    "title": "Ny dato følger",
+    "text": "Vi offentliggør næste besøgsdato, så snart den er på plads.",
     "button": {
       "text": "Jeg vil gerne høre mere",
-      "url": "mailto:info35@concordia.oddfellow.dk?subject=Jeg%20vil%20gerne%20bes%C3%B8ge%20logen%20den%2030.%20september&body=Hej%0A%0AJeg%20vil%20gerne%20h%C3%B8re%20mere%20om%20muligheden%20for%20at%20bes%C3%B8ge%20logen%20den%2030.%20september.%0A%0ANavn%3A%0ATelefonnummer%3A"
+      "url": "mailto:info35@concordia.oddfellow.dk?subject=Jeg%20vil%20gerne%20h%C3%B8re%20mere%20om%20Odd%20Fellow%20i%20Slagelse"
     }
   }
 }
