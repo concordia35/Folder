@@ -173,30 +173,13 @@ if ("serviceWorker" in navigator) {
   const sections = [...main.children].filter(el => el.tagName === 'SECTION');
   const motto = document.querySelector('.brochure-motto');
   if (motto) sections[0].append(motto);
-  const labels = ['Velkommen', 'Om Concordia', 'Er du nysgerrig?', 'En aften i logen', 'Fællesskabet', 'Velgørenhed', 'Besøg os', 'Kontakt', 'Tag brochuren med'];
+  const titles = {om:'Om Concordia', 'vores-faellesskab':'Vores værdier', medlemskab:'Et besøg', livet:'En aften hos os', praktisk:'Det praktiske', 'velgørenhed':'Velgørenhed', besoeg:'Besøg os', kontakt:'Kontakt', qr:'Gem og del'};
   sections.forEach((page, i) => {
     page.classList.add('brochure-page');
-    page.dataset.pageTitle = labels[i];
     if (!page.id) page.id = 'brochureside-' + (i + 1);
-    page.setAttribute('aria-label', labels[i]);
+    page.dataset.pageTitle = titles[page.id] || 'Velkommen';
+    page.setAttribute('aria-label', page.dataset.pageTitle);
   });
-  // Give the longer introduction its own second page rather than shrinking type.
-  const about = document.getElementById('om');
-  const paragraphs = about.querySelectorAll('.section-grid > div:first-child > p');
-  if (paragraphs.length > 1) {
-    const continuation = document.createElement('section');
-    continuation.className = 'section brochure-page';
-    continuation.id = 'vores-faellesskab';
-    continuation.dataset.pageTitle = 'Vores fællesskab';
-    continuation.setAttribute('aria-label', 'Vores fællesskab');
-    const content = createElement('div', 'container reading-page');
-    content.append(createElement('div', 'label', 'Menneskene i Concordia'), createElement('h2', '', 'Plads til forskellighed og nærvær'));
-    [...paragraphs].slice(1).forEach(p => content.append(p));
-    const features = about.querySelector('.feature-grid');
-    if (features) content.append(features);
-    continuation.append(content);
-    about.after(continuation);
-  }
   const pages = [...main.querySelectorAll(':scope > .brochure-page')];
   const bar = createElement('nav', 'page-controls');
   bar.setAttribute('aria-label', 'Bladr i brochuren');
@@ -211,9 +194,37 @@ if ("serviceWorker" in navigator) {
   next.type = 'button'; next.setAttribute('aria-label', 'Næste side');
   bar.append(prev, middle, next);
   main.after(bar);
+  const contact = document.querySelector('.contact-dock');
+  const contactButton = createElement('button', 'contact-toggle', 'Kontakt');
+  contactButton.type = 'button';
+  contact.id = 'contactMenu';
+  contactButton.setAttribute('aria-controls', contact.id);
+  contactButton.setAttribute('aria-expanded', 'false');
+  bar.append(contactButton);
+  const closeContact = () => {
+    contact.classList.remove('contact-open');
+    contactButton.setAttribute('aria-expanded', 'false');
+  };
+  contact.querySelectorAll('a').forEach(a => {
+    a.append(document.createTextNode(a.getAttribute('aria-label').replace('Åbn ', '').replace('Send mail', 'Skriv til os')));
+    a.addEventListener('click', closeContact);
+  });
+  contactButton.addEventListener('click', () => {
+    const open = contact.classList.toggle('contact-open');
+    contactButton.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', e => {
+    if (!contact.contains(e.target) && !contactButton.contains(e.target)) closeContact();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && contact.classList.contains('contact-open')) {
+      closeContact(); contactButton.focus();
+    }
+  });
   let current = 0;
   const available = () => pages.filter(page => !page.hidden && page.childElementCount > 0);
   function show(index, updateHash = true) {
+    closeContact();
     const list = available();
     current = Math.max(0, Math.min(list.length - 1, index));
     pages.forEach(page => { page.classList.remove('current-page'); page.inert = true; page.setAttribute('aria-hidden', 'true'); });
@@ -224,10 +235,9 @@ if ("serviceWorker" in navigator) {
     counter.textContent = `${current + 1} af ${list.length} · ${page.dataset.pageTitle}`;
     prev.disabled = current === 0; next.disabled = current === list.length - 1;
     dots.replaceChildren(...list.map((p, i) => {
-      const dot = createElement('button', 'page-dot');
-      dot.type = 'button'; dot.setAttribute('aria-label', `Side ${i + 1}: ${p.dataset.pageTitle}`);
+      const dot = createElement('span', 'page-dot');
+      dot.setAttribute('aria-hidden', 'true');
       if (i === current) dot.setAttribute('aria-current', 'page');
-      dot.addEventListener('click', () => show(i));
       return dot;
     }));
     if (updateHash) history.replaceState(null, '', '#' + page.id);
@@ -273,4 +283,20 @@ if ("serviceWorker" in navigator) {
   }).observe(document.getElementById('besoeg'), {childList:true, attributes:true, attributeFilter:['hidden']});
   document.body.classList.add('paged-brochure');
   show(0, false); openHash();
+})();
+
+// Share the brochure's public address, without a page-specific hash.
+(() => {
+ const address = new URL('./', location.href).href;
+ const status = document.getElementById('shareStatus');
+ const copy = async () => {
+   try { await navigator.clipboard.writeText(address); status.textContent = 'Linket er kopieret.'; }
+   catch { status.textContent = 'Kopiér linket her:'; const input = document.createElement('input'); input.value = address; input.readOnly = true; input.setAttribute('aria-label','Link til brochuren'); status.append(input); input.focus(); input.select(); }
+ };
+ document.getElementById('copyBrochure').addEventListener('click', copy);
+ document.getElementById('shareBrochure').addEventListener('click', async () => {
+   if (!navigator.share) return copy();
+   try { await navigator.share({title:'35 Concordia', text:'Et fællesskab med plads til dig.', url:address}); }
+   catch (error) { if (error.name !== 'AbortError') await copy(); }
+ });
 })();
