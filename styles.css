@@ -850,3 +850,8 @@ h2{font-size:clamp(2rem,3.5vw,3.4rem);font-weight:500;line-height:1.14;letter-sp
 .page-controls{min-height:68px;padding:6px 12px;gap:10px}.page-position{min-width:0;flex:1;max-width:250px}.page-counter{font-size:11px}.page-dot{width:17px;height:20px}.page-arrow{width:40px;height:40px}.paged-brochure .contact-dock{padding-top:6px}.paged-brochure .contact-dock .icon-link{min-height:38px;padding:7px 4px}.paged-brochure .qr-frame{width:130px}.paged-brochure .qr-card{gap:18px}
 }
 @media(prefers-reduced-motion:reduce){.paged-brochure .current-page{animation:none}}
+
+/* Brochure pages use the full space above the page controls. */
+.paged-brochure .topbar{display:none}
+.paged-brochure .brochure-page{padding-top:max(24px,env(safe-area-inset-top))}
+@media(max-width:680px){.paged-brochure .brochure-page{padding-top:max(20px,env(safe-area-inset-top))}}
