@@ -1,6 +1,3 @@
-const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-const mobileNav = document.getElementById("mobileNav");
-
 const createElement = (tag, className, text) => {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -121,25 +118,6 @@ async function loadEvents() {
 
 loadEvents();
 
-function closeMobileMenu() {
-  if (!mobileMenuBtn || !mobileNav) return;
-  mobileNav.classList.remove("open");
-  mobileMenuBtn.setAttribute("aria-expanded", "false");
-  mobileMenuBtn.setAttribute("aria-label", "Åbn menu");
-}
-
-if (mobileMenuBtn && mobileNav) {
-  mobileMenuBtn.addEventListener("click", function () {
-    const isOpen = mobileNav.classList.toggle("open");
-    mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
-    mobileMenuBtn.setAttribute("aria-label", isOpen ? "Luk menu" : "Åbn menu");
-  });
-
-  mobileNav.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", closeMobileMenu);
-  });
-}
-
 const modalContent = {
   venskab: {
     title: "Venskab og fortrolighed",
@@ -198,7 +176,6 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     closeModal();
     closeInstallGuide();
-    closeMobileMenu();
   }
 });
 
@@ -328,7 +305,6 @@ if ("serviceWorker" in navigator) {
       return dot;
     }));
     if (updateHash) history.replaceState(null, '', '#' + page.id);
-    closeMobileMenu();
   }
   const openHash = () => {
     let id; try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
@@ -371,37 +347,4 @@ if ("serviceWorker" in navigator) {
   }).observe(document.getElementById('besoeg'), {childList:true, attributes:true, attributeFilter:['hidden']});
   document.body.classList.add('paged-brochure');
   show(0, false); openHash();
-})();
-
-
-// Browsers require a direct tap to enter immersive fullscreen.
-(() => {
-  if (!document.fullscreenEnabled || !document.documentElement.requestFullscreen) return;
-  const controls = document.querySelector('.page-controls');
-  if (!controls) return;
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'fullscreen-toggle';
-  button.textContent = '⛶';
-  button.setAttribute('aria-label', 'Åbn i fuldskærm');
-  button.title = 'Fuldskærm';
-  const sync = () => {
-    const active = Boolean(document.fullscreenElement);
-    button.setAttribute('aria-pressed', String(active));
-    button.setAttribute('aria-label', active ? 'Forlad fuldskærm' : 'Åbn i fuldskærm');
-    button.title = active ? 'Forlad fuldskærm' : 'Fuldskærm';
-  };
-  button.addEventListener('click', async () => {
-    try {
-      if (document.fullscreenElement) await document.exitFullscreen();
-      else await document.documentElement.requestFullscreen({ navigationUI: 'hide' });
-    } catch {
-      button.title = 'Fuldskærm kunne ikke åbnes. Prøv at åbne brochuren fra hjemmeskærmen.';
-      button.setAttribute('aria-label', button.title);
-    }
-    sync();
-  });
-  document.addEventListener('fullscreenchange', sync);
-  controls.append(button);
-  sync();
 })();

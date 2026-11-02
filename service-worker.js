@@ -1,11 +1,11 @@
-const CACHE_NAME = "concordia-brochure-v15";
+const CACHE_NAME = "concordia-brochure-v16";
 const CORE_ASSETS = [
   "./", "./index.html", "./styles.css", "./app.js", "./arrangementer.json",
   "./manifest.webmanifest", "./icon-192.png", "./icon-512.png",
   "./apple-touch-icon.png", "./favicon-32.png", "./logo.png", "./qrv1.png",
   "./billede2_bibliotekstue.webp", "./billede3_rundtbord.webp",
   "./billede4_samtale.webp", "./billede6_velgorenhed.webp",
-  "./billede1_bygning.png", "./oktoberfest.webp", "./samtale.webp"
+  "./billede1_bygning.png", "./samtale.webp", "./noget-spaendende-er-paa-vej.png"
 ];
 
 self.addEventListener("install", event => {
