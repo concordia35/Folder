@@ -716,3 +716,7 @@ h2{font-size:clamp(2rem,3.5vw,3.4rem);font-weight:500;line-height:1.14;letter-sp
  .paged-brochure #qr .qr-card{gap:22px}
  .paged-brochure #qr .qr-frame{width:min(280px,72vw)}
 }
+
+/* Official gold and black chain links, with a transparent background. */
+.paged-brochure .cover-mark{filter:none;width:150px;height:auto;max-width:40vw;object-fit:contain}
+@media(max-width:680px){.paged-brochure .cover-mark{width:120px;height:auto}}
