@@ -262,3 +262,113 @@ if ("serviceWorker" in navigator) {
     });
   });
 }
+
+
+// A paged brochure: only the current spread is exposed to readers.
+(() => {
+  const main = document.querySelector('main');
+  const sections = [...main.children].filter(el => el.tagName === 'SECTION');
+  const motto = document.querySelector('.brochure-motto');
+  if (motto) sections[0].append(motto);
+  const labels = ['Velkommen', 'Om Concordia', 'Er du nysgerrig?', 'En aften i logen', 'Fællesskabet', 'Velgørenhed', 'Arrangementer', 'Besøg os', 'Kontakt', 'Tag brochuren med'];
+  sections.forEach((page, i) => {
+    page.classList.add('brochure-page');
+    page.dataset.pageTitle = labels[i];
+    if (!page.id) page.id = 'brochureside-' + (i + 1);
+    page.setAttribute('aria-label', labels[i]);
+  });
+  // Give the longer introduction its own second page rather than shrinking type.
+  const about = document.getElementById('om');
+  const paragraphs = about.querySelectorAll('.section-grid > div:first-child > p');
+  if (paragraphs.length > 1) {
+    const continuation = document.createElement('section');
+    continuation.className = 'section brochure-page';
+    continuation.id = 'vores-faellesskab';
+    continuation.dataset.pageTitle = 'Vores fællesskab';
+    continuation.setAttribute('aria-label', 'Vores fællesskab');
+    const content = createElement('div', 'container reading-page');
+    content.append(createElement('div', 'label', 'Menneskene i Concordia'), createElement('h2', '', 'Plads til forskellighed og nærvær'));
+    [...paragraphs].slice(1).forEach(p => content.append(p));
+    const features = about.querySelector('.feature-grid');
+    if (features) content.append(features);
+    continuation.append(content);
+    about.after(continuation);
+  }
+  const pages = [...main.querySelectorAll(':scope > .brochure-page')];
+  const bar = createElement('nav', 'page-controls');
+  bar.setAttribute('aria-label', 'Bladr i brochuren');
+  const prev = createElement('button', 'page-arrow', '←');
+  prev.type = 'button'; prev.setAttribute('aria-label', 'Forrige side');
+  const middle = createElement('div', 'page-position');
+  const counter = createElement('span', 'page-counter');
+  counter.setAttribute('aria-live', 'polite');
+  const dots = createElement('div', 'page-dots');
+  middle.append(counter, dots);
+  const next = createElement('button', 'page-arrow', '→');
+  next.type = 'button'; next.setAttribute('aria-label', 'Næste side');
+  bar.append(prev, middle, next);
+  main.after(bar);
+  let current = 0;
+  const available = () => pages.filter(page => !page.hidden && page.childElementCount > 0);
+  function show(index, updateHash = true) {
+    const list = available();
+    current = Math.max(0, Math.min(list.length - 1, index));
+    pages.forEach(page => { page.classList.remove('current-page'); page.inert = true; page.setAttribute('aria-hidden', 'true'); });
+    const page = list[current];
+    if (!page) return;
+    page.classList.add('current-page'); page.inert = false; page.removeAttribute('aria-hidden');
+    page.scrollTop = 0;
+    counter.textContent = `${current + 1} af ${list.length} · ${page.dataset.pageTitle}`;
+    prev.disabled = current === 0; next.disabled = current === list.length - 1;
+    dots.replaceChildren(...list.map((p, i) => {
+      const dot = createElement('button', 'page-dot');
+      dot.type = 'button'; dot.setAttribute('aria-label', `Side ${i + 1}: ${p.dataset.pageTitle}`);
+      if (i === current) dot.setAttribute('aria-current', 'page');
+      dot.addEventListener('click', () => show(i));
+      return dot;
+    }));
+    if (updateHash) history.replaceState(null, '', '#' + page.id);
+    closeMobileMenu();
+  }
+  const openHash = () => {
+    let id; try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    const page = target?.closest('.brochure-page');
+    if (page && available().includes(page)) show(available().indexOf(page), false);
+  };
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+    const page = target?.closest('.brochure-page');
+    if (!page) return;
+    event.preventDefault(); show(available().indexOf(page));
+  });
+  document.addEventListener('keydown', event => {
+    if (document.querySelector('.modal.active') || event.target.closest('input, textarea, select, button, a')) return;
+    if (event.key === 'ArrowRight') { event.preventDefault(); show(current + 1); }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); show(current - 1); }
+  });
+  let start = null;
+  main.addEventListener('touchstart', event => {
+    if (event.touches.length !== 1 || event.target.closest('a,button,input,.modal')) { start = null; return; }
+    start = { x:event.touches[0].clientX, y:event.touches[0].clientY };
+  }, {passive:true});
+  main.addEventListener('touchend', event => {
+    if (!start || !event.changedTouches.length) return;
+    const dx = event.changedTouches[0].clientX - start.x;
+    const dy = event.changedTouches[0].clientY - start.y;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) show(current + (dx < 0 ? 1 : -1));
+    start = null;
+  }, {passive:true});
+  main.addEventListener('touchcancel', () => { start = null; }, {passive:true});
+  window.addEventListener('hashchange', openHash);
+  new MutationObserver(() => {
+    const active = pages.find(p => p.classList.contains('current-page'));
+    show(Math.max(0, available().indexOf(active)), false);
+  }).observe(document.getElementById('besoeg'), {childList:true, attributes:true, attributeFilter:['hidden']});
+  document.body.classList.add('paged-brochure');
+  show(0, false); openHash();
+})();
