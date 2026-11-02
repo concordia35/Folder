@@ -1,4 +1,4 @@
-const CACHE_NAME = "concordia-brochure-v14";
+const CACHE_NAME = "concordia-brochure-v15";
 const CORE_ASSETS = [
   "./", "./index.html", "./styles.css", "./app.js", "./arrangementer.json",
   "./manifest.webmanifest", "./icon-192.png", "./icon-512.png",
