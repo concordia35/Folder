@@ -683,3 +683,36 @@ h2{font-size:clamp(2rem,3.5vw,3.4rem);font-weight:500;line-height:1.14;letter-sp
 @media(prefers-reduced-motion:reduce){.paged-brochure .current-page{animation:none}}
 .paged-brochure .brochure-page{padding-top:max(24px,env(safe-area-inset-top))}
 @media(max-width:680px){.paged-brochure .brochure-page{padding-top:max(20px,env(safe-area-inset-top))}}
+
+
+/* Compact floating contact links free the full-width bottom row. */
+.paged-brochure .contact-dock{
+  display:flex;position:fixed;left:auto;right:16px;bottom:90px;
+  flex-direction:row;gap:8px;width:auto;padding:0;
+  background:transparent;border:0;z-index:55;
+}
+.paged-brochure .contact-dock .icon-link{
+  width:44px;height:44px;min-height:44px;padding:0;display:grid;place-items:center;
+  border-radius:50%;background:#fffaf3;color:var(--accent);
+  border:1px solid #d9c7b7;box-shadow:0 3px 12px #32292320;
+}
+.paged-brochure .contact-dock .icon-link:first-child{background:var(--accent);color:#fff;border-color:var(--accent)}
+.paged-brochure .contact-dock svg{width:19px;height:19px}
+.paged-brochure .brochure-page{padding-bottom:76px}
+.paged-brochure .hero.current-page{padding-bottom:64px}
+.paged-brochure #qr.current-page{padding-bottom:76px}
+.paged-brochure #qr>.container{margin-block:auto}
+.paged-brochure #qr .qr-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px}
+.paged-brochure #qr .qr-card>div:first-child{max-width:580px}
+.paged-brochure #qr h2{max-width:24ch;margin-inline:auto}
+.paged-brochure #qr .qr-card p{margin-inline:auto}
+.paged-brochure #qr .qr-actions{justify-content:center;align-items:center;flex-direction:column;gap:10px}
+.paged-brochure #qr .qr-actions-note{margin:0}
+.paged-brochure #qr .qr-frame{width:min(280px,72vw);justify-self:center;padding:16px}
+.paged-brochure #qr .qr-frame img{width:100%;height:auto;aspect-ratio:1}
+.paged-brochure #qr .qr-caption{font-size:12px}
+@media(max-width:680px){
+ .paged-brochure .contact-dock{right:12px;bottom:80px}
+ .paged-brochure #qr .qr-card{gap:22px}
+ .paged-brochure #qr .qr-frame{width:min(280px,72vw)}
+}
