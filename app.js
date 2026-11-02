@@ -5,75 +5,9 @@ const createElement = (tag, className, text) => {
   return element;
 };
 
-function createInfoItem(label, value) {
-  const item = createElement("div", "contact-item");
-  item.append(createElement("div", "contact-label", label));
-  item.append(createElement("div", "contact-value", value));
-  return item;
-}
-
-function createEventCard(event) {
-  const card = createElement("article", "event-card section-grid");
-  const content = createElement("div");
-  content.append(createElement("div", "label", event.label || "Arrangement"));
-  content.append(createElement("h2", "", event.title));
-  content.append(createElement("p", "", event.intro));
-
-  const details = createElement("div", "contact-box");
-  (event.details || []).forEach(detail => {
-    details.append(createInfoItem(detail.label, detail.value));
-  });
-
-  if (event.link?.url && event.link?.text) {
-    const linkItem = createElement("div", "contact-item");
-    linkItem.append(createElement("div", "contact-label", event.link.label || "Læs mere"));
-    const value = createElement("div", "contact-value");
-    const link = createElement("a", "", event.link.text);
-    link.href = event.link.url;
-    if (/^https?:/i.test(event.link.url)) {
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-    }
-    value.append(link);
-    linkItem.append(value);
-    details.append(linkItem);
-  }
-
-  content.append(details);
-  card.append(content);
-
-  if (event.image) {
-    const imageCard = createElement("div", "flyer-card");
-    const image = createElement("img");
-    image.src = event.image;
-    image.alt = event.imageAlt || event.title;
-    image.loading = "lazy";
-    image.decoding = "async";
-    imageCard.append(image);
-    card.append(imageCard);
-  }
-
-  return card;
-}
-
 function renderEvents(data) {
-  const eventContainer = document.getElementById("arrangementerIndhold");
   const visitContainer = document.getElementById("besoeg");
-  if (!eventContainer || !visitContainer) return;
-
-  eventContainer.replaceChildren();
-  const events = (data.arrangementer || []).filter(event => event.active !== false);
-
-  if (events.length === 0) {
-    eventContainer.append(createElement("div", "label", "Arrangementer"));
-    eventContainer.append(createElement("h2", "", "Nye arrangementer er på vej"));
-    eventContainer.append(createElement("p", "", "Følg med her eller på vores sociale medier."));
-  } else {
-    const list = createElement("div", "event-list");
-    events.forEach(event => list.append(createEventCard(event)));
-    eventContainer.append(list);
-  }
-
+  if (!visitContainer) return;
   visitContainer.replaceChildren();
   if (data.besoeg?.active !== false) {
     const outer = createElement("div", "container");
@@ -104,15 +38,7 @@ async function loadEvents() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     renderEvents(await response.json());
   } catch (error) {
-    const container = document.getElementById("arrangementerIndhold");
-    if (container) {
-      container.replaceChildren(
-        createElement("div", "label", "Arrangementer"),
-        createElement("h2", "", "Arrangementerne kunne ikke indlæses"),
-        createElement("p", "", "Prøv at genindlæse siden, når du har forbindelse igen.")
-      );
-    }
-    console.warn("Arrangementer kunne ikke indlæses", error);
+    console.warn("Besøgsoplysninger kunne ikke indlæses", error);
   }
 }
 
@@ -247,7 +173,7 @@ if ("serviceWorker" in navigator) {
   const sections = [...main.children].filter(el => el.tagName === 'SECTION');
   const motto = document.querySelector('.brochure-motto');
   if (motto) sections[0].append(motto);
-  const labels = ['Velkommen', 'Om Concordia', 'Er du nysgerrig?', 'En aften i logen', 'Fællesskabet', 'Velgørenhed', 'Arrangementer', 'Besøg os', 'Kontakt', 'Tag brochuren med'];
+  const labels = ['Velkommen', 'Om Concordia', 'Er du nysgerrig?', 'En aften i logen', 'Fællesskabet', 'Velgørenhed', 'Besøg os', 'Kontakt', 'Tag brochuren med'];
   sections.forEach((page, i) => {
     page.classList.add('brochure-page');
     page.dataset.pageTitle = labels[i];
