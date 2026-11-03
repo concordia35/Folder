@@ -768,3 +768,34 @@ h2{font-size:clamp(2rem,3.5vw,3.4rem);font-weight:500;line-height:1.14;letter-sp
  .paged-brochure .cover-edition h1{margin-top:12px}
  .paged-brochure .cover-edition .hero-actions{margin-top:18px}
 }
+
+
+/* Charity page: a full-width photo and a single reading column. */
+.paged-brochure #velgørenhed{background:#f8f4ed;padding:0 0 76px}
+.paged-brochure #velgørenhed>.section-grid{
+  width:100%;max-width:900px;margin-block:auto;display:flex;
+  flex-direction:column;align-items:stretch;gap:0;padding:0;
+}
+.paged-brochure #velgørenhed .image-card{
+  order:-1;align-self:stretch;width:100%;margin:0;background:#eee6da;
+}
+.paged-brochure #velgørenhed .image-card img{
+  display:block;width:100%;height:auto;max-height:none;min-height:0;
+  aspect-ratio:4/3;object-fit:contain;
+}
+.paged-brochure #velgørenhed .section-grid>div:first-child{
+  padding:26px 32px 8px;max-width:720px;align-self:center;width:100%;
+}
+.paged-brochure #velgørenhed .label{margin-bottom:12px}
+.paged-brochure #velgørenhed h2{max-width:20ch;font-size:clamp(1.8rem,4.7vw,2.6rem)}
+.paged-brochure #velgørenhed p{line-height:1.7}
+@media(max-width:680px){
+ .paged-brochure #velgørenhed>.section-grid{margin-block:0}
+ .paged-brochure #velgørenhed .section-grid>div:first-child{padding:24px 22px 12px}
+ .paged-brochure #velgørenhed .image-card img{width:100%;height:auto;max-height:none;aspect-ratio:4/3;object-fit:contain}
+}
+@media(min-width:981px){
+ .paged-brochure #velgørenhed>.section-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;max-width:1200px;width:calc(100% - 80px)}
+ .paged-brochure #velgørenhed .image-card{order:0;grid-column:1;grid-row:1}
+ .paged-brochure #velgørenhed .section-grid>div:first-child{grid-column:2;grid-row:1;padding:20px 0}
+}
