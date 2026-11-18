@@ -274,3 +274,30 @@ if ("serviceWorker" in navigator) {
   document.body.classList.add('paged-brochure');
   show(0, false); openHash();
 })();
+
+document.getElementById("shareFolderBtn")?.addEventListener("click", async () => {
+  const url = "https://concordia35.github.io/Folder/";
+  const status = document.getElementById("shareFolderStatus");
+  status.textContent = "";
+
+  if (typeof navigator.share === "function") {
+    try {
+      await navigator.share({ title: "35 Concordia · Slagelse", url });
+      return;
+    } catch (error) {
+      if (error.name === "AbortError") return;
+    }
+  }
+
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(url);
+      status.textContent = "Linket er kopieret.";
+      return;
+    } catch {
+      // Let the user copy the link manually if clipboard access fails.
+    }
+  }
+
+  window.prompt("Kopiér linket til folderen", url);
+});
